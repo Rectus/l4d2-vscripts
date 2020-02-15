@@ -52,8 +52,7 @@ DYNAMIC_ENTITIES <-
 
 viewmodel <- null // Viewmodel entity
 currentPlayer <- null // The player using the weapon
-firing <- false // True while the weapon is firing
-activeFiring <- false // True while the player holds the fire button
+tongueFired <- false // True if the tongue has been fired
 newPickup <- true
 
 tongueEndpoint <- null
@@ -68,7 +67,7 @@ tongueForceRampdown <- 0
 useTongueFixup <- 1
 reelSoundTimer <- 0
 
-
+weaponController <- null // Gets filled in by the controller before OnInitalize()
 
 function OnInitialize()
 {
@@ -103,12 +102,12 @@ function OnEquipped(player, _viewmodel)
 		DoEntFire("!self", "SpeakResponseConcept", "PlayerLaugh", 0, currentPlayer, currentPlayer)
 		newPickup = false
 	}
-	EndedFiring()
+	OnEndFiring()
 }
 
 function OnUnEquipped()
 {
-	EndedFiring()
+	OnEndFiring()
 	
 	currentPlayer = null
 	viewmodel = null
@@ -116,10 +115,15 @@ function OnUnEquipped()
 
 function OnStartFiring()
 {
-	activeFiring = true
+	ShootTongue()
+}
 
-	if(!firing && currentPlayer)
+function ShootTongue()
+{
+	if(!tongueFired && currentPlayer)
 	{		
+		tongueFired = true
+	
 		DoEntFire("!self", "SetParent", "!activator", 0, viewmodel, rope1)
 		DoEntFire("!self", "SetParentAttachment", "attach_nozzle", 0.01, rope1, rope1)	
 
@@ -129,8 +133,7 @@ function OnStartFiring()
 			rope1.__KeyValueFromString("cpoint1", rope2.GetName())
 			ropeFall.__KeyValueFromString("cpoint1", rope2.GetName())
 		}
-	
-		firing = true
+
 		tongueDistance = 0
 		useTongueFixup = 1
 		tongueForceRampdown = 0
@@ -192,16 +195,16 @@ function OnStartFiring()
 
 function OnFireTick(playerButtonMask)
 {
-	if(!firing)
+	if(!tongueFired)
 	{
-		return
+		ShootTongue()
 	}
 	
 	local attack2Pressed = (playerButtonMask & (DirectorScript.IN_RELOAD | DirectorScript.IN_ATTACK2)) != 0
 	
 	if(tongueHitDynamic && (!tongueVictim || !tongueVictim.IsValid()))
 	{
-		EndedFiring()
+		OnEndFiring()
 		return
 	}
 
@@ -251,7 +254,9 @@ function OnFireTick(playerButtonMask)
 				{
 					StopSoundOn("SmokerZombie.TongueFly", currentPlayer)
 					EmitSoundOn("SmokerZombie.TongueHit", currentPlayer)
-					EndedFiring()
+					
+					OnEndFiring()
+					return
 				}
 			}
 			else
@@ -338,12 +343,6 @@ function OnFireTick(playerButtonMask)
 				DebugDrawLine(nozzlePos, tonguePosition, 255, 0, 0, true, 0.11)
 			}
 		}
-	}
-	
-	
-	if(!activeFiring)
-	{
-		EndedFiring()
 	}	
 }
 
@@ -373,40 +372,56 @@ function ClampPlayerVelocity()
 
 function OnEndFiring()
 {
-	activeFiring = false
-}
+	tongueFired = false
+	StopSoundOn("SmokerZombie.TongueFly", currentPlayer)
+	EmitSoundOn("SmokerZombie.TongueStrain", currentPlayer)
 
-function EndedFiring()
-{
-	if(firing)
-	{			
-		StopSoundOn("SmokerZombie.TongueFly", currentPlayer)
-		EmitSoundOn("SmokerZombie.TongueStrain", currentPlayer)
-
-		DoEntFire("!self", "EnableLedgeHang", "", 0.5, self, currentPlayer)
-		
-		ropeFall.SetOrigin(rope1.GetOrigin())
-		DoEntFire("!self", "Start", "", 0, self, ropeFall)
-		DoEntFire("!self", "Stop", "", 1, self, ropeFall)
-		
-		DoEntFire("!self", "ClearParent", "", 0, self, rope1)
-		DoEntFire("!self", "ClearParent", "", 0, self, rope2)
-		DoEntFire("!self", "RunScriptCode", "self.SetOrigin(Vector(0,0,0))", 0.01, rope1, rope1)
-		DoEntFire("!self", "RunScriptCode", "self.SetOrigin(Vector(0,0,0))", 0.01, rope2, rope2)
-		tongueVictimLocPos = null
-		tongueVictim = null
-		tongueHitDynamic = null
-		firing = false
-	}
+	DoEntFire("!self", "EnableLedgeHang", "", 0.5, self, currentPlayer)
+	
+	ropeFall.SetOrigin(rope1.GetOrigin())
+	DoEntFire("!self", "Start", "", 0, self, ropeFall)
+	DoEntFire("!self", "Stop", "", 1, self, ropeFall)
+	
+	DoEntFire("!self", "ClearParent", "", 0, self, rope1)
+	DoEntFire("!self", "ClearParent", "", 0, self, rope2)
+	DoEntFire("!self", "RunScriptCode", "self.SetOrigin(Vector(0,0,0))", 0.01, rope1, rope1)
+	DoEntFire("!self", "RunScriptCode", "self.SetOrigin(Vector(0,0,0))", 0.01, rope2, rope2)
+	tongueVictimLocPos = null
+	tongueVictim = null
+	tongueHitDynamic = null
 }
 
 function SpawnEntityOn(keyValues)
 {
 	local spawnEnt = g_ModeScript.CreateSingleSimpleEntityFromTable(keyValues)
-	spawnEnt.SetOrigin(RotatePosition(self.GetOrigin(), self.GetAngles(), spawnEnt.GetOrigin()) + self.GetOrigin())
-	spawnEnt.SetAngles(self.GetAngles())
+	
+	if(spawnEnt)
+	{
+		spawnEnt.SetOrigin(RotatePosition(self.GetOrigin(), self.GetAngles(), spawnEnt.GetOrigin()) + self.GetOrigin())
+		spawnEnt.SetAngles(self.GetAngles())
+		
+		weaponController.RegisterTrackedEntity(spawnEnt, self)
+	}
 	
 	return spawnEnt
+}
+
+// Converts a QAngle to a vector, with a optional length.
+function VectorFromQAngle(angles, radius = 1.0)
+{
+	local function ToRad(angle)
+	{
+		return (angle * PI) / 180;
+	}
+   
+	local yaw = ToRad(angles.Yaw());
+	local pitch = ToRad(-angles.Pitch());
+   
+	local x = radius * cos(yaw) * cos(pitch);
+	local y = radius * sin(yaw) * cos(pitch);
+	local z = radius * sin(pitch);
+   
+	return Vector(x, y, z);
 }
 
 barnacle_rope1 <-

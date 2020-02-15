@@ -29,6 +29,7 @@ FUEL_RATE <- 0.3 // Fuel consumtion rate in units per frame.
 FIRE_ANIMATION_FRAMES <- 10 // Number of think frames in the firing animation, set to half the animtion as a compromise.
 MAX_FLAME_EXTENT <- 200.0 // How far the flames can project.
 FUEL_LEFT_HINT <- 20 // Fuel level to throw the low fuel hint at.
+TICK_DAMAGE <- 2
 
 viewmodel <- null // Viewmodel entity
 currentPlayer <- null // The player using the weapon
@@ -39,6 +40,8 @@ activeFiring <- false // True while the player holds the fire button
 newPickup <- true 
 animationFramesLeft <- 0
 infinteFuel <- false
+
+weaponController <- null // Gets filled in by the controller before OnInitalize()
 
 // Called after the script has loaded.
 function OnInitialize()
@@ -53,10 +56,10 @@ function OnInitialize()
 	flame <- null
 	fireball <- SpawnEntityOn(flamethrower_fireball)
 	firestream <- SpawnEntityOn(flamethrower_firestream)	
-	hurt1 <- SpawnEntityOn(flamethrower_hurt_sphere)
-	hurt2 <- SpawnEntityOn(flamethrower_hurt_sphere)
 	sound <- null
 
+	AddThinkToEnt(self, "Think")
+	
 	printl("New flamethrower on ent: " + self)
 }
 
@@ -66,25 +69,25 @@ function OnEquipped(player, _viewmodel)
 	viewmodel = _viewmodel
 	currentPlayer = player
 	
-	if(viewmodel && viewmodel.IsValid() && !flame)
+	if(viewmodel && viewmodel.IsValid())
 	{
-		flame = SpawnEntityOn(flamethrower_flame)
-		DoEntFire("!self", "SetParent", "!activator", 0, viewmodel, flame)
-		DoEntFire("!self", "SetParentAttachment", "attach_nozzle", 0.01, flame, flame)
-		EmitSoundOn("Molotov.IdleLoop", flame)
+		if(!flame)
+		{
+			flame = SpawnEntityOn(flamethrower_flame)
+			DoEntFire("!self", "SetParent", "!activator", 0, viewmodel, flame)
+			DoEntFire("!self", "SetParentAttachment", "attach_nozzle", 0.01, flame, flame)
+			EmitSoundOn("Molotov.IdleLoop", flame)
+		}
+		
+		local fuelInt = (fuel.tointeger() * 0.065).tointeger() + 1
+		DoEntFire("!self", "skin", fuelInt.tostring(), 0, self, viewmodel)
 	}
 	
 	if(newPickup)
 	{
 		DoEntFire("!self", "SpeakResponseConcept", "PlayerLaugh", 0, currentPlayer, currentPlayer)
 		newPickup = false
-	}
-	
-	local infAmmoCvar = Convars.GetFloat("sv_infinite_ammo")
-	if(infAmmoCvar)
-	{
-		infinteFuel = (infAmmoCvar > 0)
-	}
+	}	
 }
 
 // Called when the player switches away from the weapon.
@@ -92,6 +95,7 @@ function OnUnEquipped()
 {
 	EndedFiring()
 	StopSoundOn("Molotov.IdleLoop", flame)
+	weaponController.UnregisterTrackedEntity(flame, self)
 	DoEntFire("!self", "Kill", "", 0, flame, flame)
 	flame = null
 	currentPlayer = null
@@ -101,6 +105,12 @@ function OnUnEquipped()
 // Called when the fire button is pressed.
 function OnStartFiring()
 {
+	local infAmmoCvar = Convars.GetFloat("sv_infinite_ammo")
+	if(type(infAmmoCvar) != "null")
+	{
+		infinteFuel = (infAmmoCvar > 0)
+	}
+
 	activeFiring = true
 
 	if(!firing && fuel > 0 && currentPlayer)
@@ -127,29 +137,13 @@ function OnFireTick(playerButtonMask)
 		local nozzlePos = currentPlayer.EyePosition() + RotatePosition(currentPlayer.EyePosition(), currentPlayer.EyeAngles(), Vector(50, -5, -13))
 		
 		
-		local flameDistFraction = GetFlameExtent(currentPlayer.EyePosition())
+		local flameDistFraction = ProjectFlames(currentPlayer.EyePosition())
 		
 		fireball.SetOrigin(nozzlePos + VectorFromQAngle(currentPlayer.EyeAngles(), 8 * flameDistFraction + 8))
 		fireball.SetAngles(currentPlayer.EyeAngles())
 		
 		firestream.SetOrigin(nozzlePos + VectorFromQAngle(currentPlayer.EyeAngles(), 50 * flameDistFraction + 16))
 		firestream.SetAngles(currentPlayer.EyeAngles())
-		
-		hurt1.SetOrigin(currentPlayer.EyePosition() + VectorFromQAngle(currentPlayer.EyeAngles(), 130 * flameDistFraction + 36))
-		hurt1.__KeyValueFromInt("DamageRadius", 60 * flameDistFraction + 5)
-		
-		hurt2.SetOrigin(currentPlayer.EyePosition() + VectorFromQAngle(currentPlayer.EyeAngles(), 70 * flameDistFraction + 20))
-		hurt2.__KeyValueFromInt("DamageRadius", 45 * flameDistFraction + 5)
-		
-		if(g_WeaponController.weaponDebug)
-		{
-			DebugDrawCircle(nozzlePos, Vector(0, 0, 255), 200, 2, false, 0.11)
-			DebugDrawCircle(hurt1.GetOrigin(), Vector(255, 128, 0), 200, 45 * flameDistFraction + 5, false, 0.11)
-			DebugDrawCircle(hurt2.GetOrigin(), Vector(255, 128, 0), 200, 30 * flameDistFraction + 5, false, 0.11)
-		}
-
-		DoEntFire("!self", "Hurt", "", 0, currentPlayer, hurt1)
-		DoEntFire("!self", "Hurt", "", 0, currentPlayer, hurt2)
 	}
 	
 	if(!infinteFuel)
@@ -166,11 +160,16 @@ function OnFireTick(playerButtonMask)
 		flamethrower_empty.origin <- currentPlayer.GetOrigin() + Vector(0, 0, 4)
 		flamethrower_empty.angles <- currentPlayer.GetAngles() + QAngle(-90, 180, 0)
 		local emptyFT = g_ModeScript.CreateSingleSimpleEntityFromTable(flamethrower_empty)
+		
 		flamethrower_refill.nozzle = emptyFT.GetName()
 		flamethrower_refill.origin = self.GetOrigin()
 		local nozzle = g_ModeScript.CreateSingleSimpleEntityFromTable(flamethrower_refill)
+		
 		DoEntFire("!self", "Activate", "", 0.1, nozzle, nozzle)
-		nozzle.GetScriptScope().SetProp(emptyFT)
+		if(nozzle.ValidateScriptScope())
+		{
+			nozzle.GetScriptScope().SetProp(emptyFT)
+		}
 		
 		currentPlayer.GiveItem("pistol")
 		DoEntFire("!self", "Kill", "", 0, self, self)
@@ -185,7 +184,13 @@ function OnFireTick(playerButtonMask)
 			DoEntFire("!self", "kill", "", 5.00, hint, hint)
 			fuelHintShown = true
 		}
-		
+	}
+}
+
+function Think()
+{
+	if(firing)
+	{
 		if(--animationFramesLeft <= 0)
 		{
 			animationFramesLeft = FIRE_ANIMATION_FRAMES
@@ -195,11 +200,19 @@ function OnFireTick(playerButtonMask)
 			}
 		}
 	}
+		
+	if(viewmodel && viewmodel.IsValid())
+	{
+		local fuelInt = (fuel.tointeger() * 0.065).tointeger() + 1
+		DoEntFire("!self", "skin", fuelInt.tostring(), 0, self, viewmodel)
+	}
 }
 
 // Calculates how far to project the flames.
-function GetFlameExtent(origin)
+function ProjectFlames(origin)
 {
+	local ffFactor = GetFriendlyFireFactor()
+
 	local traceAngles =
 	[
 		QAngle(0, 0, 0)
@@ -209,6 +222,8 @@ function GetFlameExtent(origin)
 		QAngle(0, 10, 0)
 	]
 	local longestTrace = -1.0
+	
+	local entDamage = {}
 	
 	foreach(angles in traceAngles)
 	{
@@ -227,6 +242,28 @@ function GetFlameExtent(origin)
 			{
 				longestTrace = MAX_FLAME_EXTENT * traceParams.fraction
 			}
+			
+			if(("enthit" in traceParams) && traceParams.enthit && traceParams.enthit.GetEntityIndex() > 0)
+			{
+				if(!(traceParams.enthit in entDamage)) {entDamage[traceParams.enthit] <- 0} 
+				
+			
+				if(traceParams.enthit.GetClassname() == "player" && traceParams.enthit.IsSurvivor())
+				{
+					entDamage[traceParams.enthit] += TICK_DAMAGE * ffFactor
+				}
+				else
+				{
+					entDamage[traceParams.enthit] += TICK_DAMAGE
+				}
+			}
+		}
+		
+		foreach(entity, damage in entDamage)
+		{
+			if(damage > 0 && damage < 1) {damage = 1}
+			
+			entity.TakeDamage(damage, 8, currentPlayer)
 		}
 	}
 	
@@ -246,35 +283,86 @@ function OnEndFiring()
 // Called when firing cycle ends and the fire button isn't held in.
 function EndedFiring()
 {
-	if(firing)
-	{
-		DoEntFire("!self", "Stop", "", 0, self, fireball)
-		DoEntFire("!self", "Stop", "", 0, self, firestream)
-		
-		StopSoundOn("c1m1.Fireloop03", currentPlayer)
-		
-		firing = false
-	}
+	DoEntFire("!self", "Stop", "", 0, self, fireball)
+	DoEntFire("!self", "Stop", "", 0, self, firestream)
+	
+	StopSoundOn("c1m1.Fireloop03", currentPlayer)
+	
+	firing = false
 }
 
 // Unfortuantely there doesn't seem to be any way of detecting the entity being killed, 
 // so these will leak if the entiy is directly killed from outside sources.
 function OnKilled()
 {
+	weaponController.UnregisterTrackedEntity(fireball, self)
+	weaponController.UnregisterTrackedEntity(firestream, self)
+	weaponController.UnregisterTrackedEntity(flame, self)
+
 	DoEntFire("!self", "Kill", "", 0, self, fireball)
 	DoEntFire("!self", "Kill", "", 0, self, firestream)
-	DoEntFire("!self", "Kill", "", 0, self, hurt1)
-	DoEntFire("!self", "Kill", "", 0, self, hurt2)
 	DoEntFire("!self", "Kill", "", 0, flame, flame)
 }
+
 
 function SpawnEntityOn(keyValues)
 {
 	local spawnEnt = g_ModeScript.CreateSingleSimpleEntityFromTable(keyValues)
-	spawnEnt.SetOrigin(RotatePosition(self.GetOrigin(), self.GetAngles(), spawnEnt.GetOrigin()) + self.GetOrigin())
-	spawnEnt.SetAngles(self.GetAngles())
+	
+	if(spawnEnt)
+	{
+		spawnEnt.SetOrigin(RotatePosition(self.GetOrigin(), self.GetAngles(), spawnEnt.GetOrigin()) + self.GetOrigin())
+		spawnEnt.SetAngles(self.GetAngles())
+		
+		weaponController.RegisterTrackedEntity(spawnEnt, self)
+	}
 	
 	return spawnEnt
+}
+
+
+function GetFriendlyFireFactor()
+{
+	switch(Convars.GetStr("z_difficulty"))
+	{
+	case "Easy":
+	case "easy":
+		return Convars.GetFloat("survivor_friendly_fire_factor_easy")
+		
+	case "Normal":
+	case "normal":
+		return Convars.GetFloat("survivor_friendly_fire_factor_normal")
+		
+	case "Hard":
+	case "hard":
+		return Convars.GetFloat("survivor_friendly_fire_factor_hard")
+		
+	case "Impossible":
+	case "impossible":
+		return Convars.GetFloat("survivor_friendly_fire_factor_expert")
+	
+	default:
+		return 1.0
+	}
+}
+
+
+// Converts a QAngle to a vector, with a optional length.
+function VectorFromQAngle(angles, radius = 1.0)
+{
+        local function ToRad(angle)
+        {
+            return (angle * PI) / 180;
+        }
+       
+        local yaw = ToRad(angles.Yaw());
+        local pitch = ToRad(-angles.Pitch());
+       
+        local x = radius * cos(yaw) * cos(pitch);
+        local y = radius * sin(yaw) * cos(pitch);
+        local z = radius * sin(pitch);
+       
+        return Vector(x, y, z);
 }
 
 /*
@@ -287,7 +375,7 @@ flamethrower_flame <-
 	effect_name = "weapon_molotov_fp"
 	render_in_front = "0"
 	start_active = "1"
-	targetname = "flamethrower_fire"
+	targetname = "flamethrower_flame"
 	origin = Vector(0, -39, 45.7)
 }
 
@@ -298,7 +386,7 @@ flamethrower_firestream <-
 	effect_name = "fire_jet_01"
 	render_in_front = "0"
 	start_active = "0"
-	targetname = "flamethrower_fire"
+	targetname = "flamethrower_firestream"
 	origin = Vector( 50, 1, 44.25 )
 }
 
@@ -309,20 +397,10 @@ flamethrower_fireball <-
 	effect_name = "fire_small_03"
 	render_in_front = "0"
 	start_active = "0"
-	targetname = "flamethrower_fire"
+	targetname = "flamethrower_fireball"
 	origin = Vector( 80, 1, 44.25 )
 }
 
-flamethrower_hurt_sphere <-
-{
-	classname = "point_hurt"
-	Damage = "20"
-	DamageType = "8"
-	origin = Vector(0, 0, 0)
-	targetname = "flamethrower_hurt"
-	DamageRadius = "72"
-	DamageDelay = "1"
-}
 
 flamethrower_empty <-
 {
