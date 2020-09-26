@@ -1,0 +1,2967 @@
+versioninfo
+{
+	"editorversion" "400"
+	"editorbuild" "6262"
+	"mapversion" "73"
+	"formatversion" "100"
+	"prefab" "0"
+}
+visgroups
+{
+	visgroup
+	{
+		"name" "zones"
+		"visgroupid" "12"
+		"color" "87 180 117"
+	}
+}
+viewsettings
+{
+	"bSnapToGrid" "1"
+	"bShowGrid" "1"
+	"bShowLogicalGrid" "0"
+	"nGridSpacing" "1"
+	"bShow3DGrid" "0"
+}
+world
+{
+	"id" "1"
+	"mapversion" "73"
+	"classname" "worldspawn"
+	"detailmaterial" "detail/detailsprites"
+	"detailvbsp" "detail.vbsp"
+	"maxpropscreenwidth" "-1"
+	"musicpostfix" "Waterfront"
+	"skyname" "sky_l4d_rural02_hdr"
+	solid
+	{
+		"id" "2"
+		side
+		{
+			"id" "1"
+			"plane" "(-1024 -512 0) (-1024 512 0) (512 512 0)"
+			"material" "TOOLS/TOOLSSKIP"
+			"uaxis" "[1 0 0 0] 0.25"
+			"vaxis" "[0 -1 0 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "2"
+			"plane" "(-1024 512 -4) (-1024 -512 -4) (512 -512 -4)"
+			"material" "TOOLS/TOOLSSKIP"
+			"uaxis" "[-1 0 0 0] 0.25"
+			"vaxis" "[0 -1 0 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "3"
+			"plane" "(-1024 -512 -4) (-1024 512 -4) (-1024 512 0)"
+			"material" "TOOLS/TOOLSSKIP"
+			"uaxis" "[0 -1 0 0] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "4"
+			"plane" "(512 512 -4) (512 -512 -4) (512 -512 0)"
+			"material" "TOOLS/TOOLSSKIP"
+			"uaxis" "[0 1 0 0] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "5"
+			"plane" "(-1024 512 -4) (512 512 -4) (512 512 0)"
+			"material" "TOOLS/TOOLSSKIP"
+			"uaxis" "[-1 0 0 0] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "6"
+			"plane" "(512 -512 -4) (-1024 -512 -4) (-1024 -512 0)"
+			"material" "TOOLS/TOOLSSKIP"
+			"uaxis" "[1 0 0 0] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		editor
+		{
+			"color" "0 243 160"
+			"visgroupshown" "1"
+			"visgroupautoshown" "1"
+		}
+	}
+}
+entity
+{
+	"id" "4"
+	"classname" "material_modify_control"
+	"materialName" "models/props_gdef/turret/50cal_heat"
+	"materialVar" "$HeatAmount"
+	"parentname" "flak_turret_gun"
+	"targetname" "flak_turret_heattexture"
+	"origin" "-376.214 -416 9.25002"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "6"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/laser_turret_traverse.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "laser_turret_traverse"
+	"origin" "-384 -128 40"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "10"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/laser_turret_gun.mdl"
+	"parentname" "laser_turret_traverse"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "laser_turret_gun"
+	"thinkfunction" "Think"
+	"vscripts" "gdef_turret_laser"
+	connections
+	{
+		"OnUser1" "laser_turret_beamKill0-1"
+		"OnUser1" "laser_turret_traverseKill0-1"
+		"OnUser1" "laser_turret_baseKill0-1"
+		"OnUser1" "laser_turret_heattextureKill0-1"
+		"OnUser1" "laser_turret_beam_targetKill0-1"
+		"OnUser1" "laser_turret_muzzleflashKill0-1"
+		"OnUser1" "!selfKill0-1"
+		"OnUser1" "laser_turret_comp_useKill0-1"
+		"OnUser1" "exclusion_zone_laser_turretKill0-1"
+		"OnUser1" "laser_turret_base_useKill0-1"
+		"OnUser1" "laser_turret_compKill0-1"
+		"OnUser1" "laser_turret_heat_effectKill0-1"
+	}
+	"origin" "-387 -128 49"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "14"
+	"classname" "env_laser"
+	"damage" "100"
+	"dissolvetype" "None"
+	"EndSprite" "sprites/redglow3.vmt"
+	"framestart" "0"
+	"LaserTarget" "laser_turret_beam_target"
+	"NoiseAmplitude" "0"
+	"parentname" "laser_turret_gun"
+	"renderamt" "25"
+	"rendercolor" "255 0 0"
+	"renderfx" "11"
+	"spawnflags" "96"
+	"targetname" "laser_turret_beam"
+	"texture" "sprites/laserbeam.vmt"
+	"TextureScroll" "35"
+	"width" "0.25"
+	"origin" "-365 -128 49"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "17"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/laser_turret_base.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "laser_turret_base"
+	"origin" "-384 -128 0"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "24"
+	"classname" "point_template"
+	"spawnflags" "0"
+	"targetname" "laser_turret_template"
+	"Template01" "laser_turret_base"
+	"Template02" "laser_turret_traverse"
+	"Template03" "laser_turret_heattexture"
+	"Template04" "laser_turret_gun"
+	"Template05" "laser_turret_beam"
+	"Template06" "laser_turret_beam_target"
+	"Template07" "laser_turret_heat_effect"
+	"Template08" "laser_turret_muzzleflash"
+	"Template09" "exclusion_zone_laser_turret"
+	"Template10" "laser_turret_comp_use"
+	"Template11" "laser_turret_base_use"
+	"Template12" "laser_turret_comp"
+	"origin" "-384 -128 20"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "28"
+	"classname" "env_sprite"
+	"disablereceiveshadows" "0"
+	"disableX360" "0"
+	"fademaxdist" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"framerate" "10.0"
+	"GlowProxySize" "1.0"
+	"HDRColorScale" "0.7"
+	"maxcpulevel" "0"
+	"maxgpulevel" "0"
+	"mincpulevel" "0"
+	"mingpulevel" "0"
+	"model" "sprites/redglow3.vmt"
+	"parentname" "laser_turret_gun"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"renderfx" "0"
+	"rendermode" "9"
+	"spawnflags" "0"
+	"targetname" "laser_turret_muzzleflash"
+	"origin" "-365 -128 49"
+	editor
+	{
+		"color" "20 140 20"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "93"
+	"classname" "prop_physics_override"
+	"angles" "0 270 0"
+	"damagetoenablemotion" "0"
+	"Damagetype" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"forcetoenablemotion" "0"
+	"glowcolor" "0 0 0"
+	"glowstate" "0"
+	"health" "0"
+	"inertiaScale" "1.0"
+	"massScale" "0"
+	"minhealthdmg" "0"
+	"model" "models/props_gdef/turret/laser_crate.mdl"
+	"nodamageforces" "0"
+	"physdamagescale" "0.1"
+	"shadowcastdist" "0"
+	"skin" "0"
+	"spawnflags" "41216"
+	"targetname" "laser_turret_crate"
+	connections
+	{
+		"OnUser1" "!selfKill0.1-1"
+		"OnUser1" "laser_turret_crate_spawnerKill0.1-1"
+		"OnUser1" "laser_turret_crate_useKill0.1-1"
+		"OnUser1" "laser_turret_crate_particleStart0-1"
+		"OnUser1" "laser_turret_crate_spawnerForceSpawn0-1"
+		"OnPhysGunDrop" "!selfRunScriptCodeg_ModeScript.CrateDropped()0-1"
+		"OnUser1" "laser_turret_crate_rangeKill0.1-1"
+	}
+	"origin" "-816 -128 36"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "97"
+	"classname" "point_script_use_target"
+	"model" "laser_turret_crate"
+	"origin" "-816 -128 36"
+	"targetname" "laser_turret_crate_use"
+	"thinkfunction" "Think"
+	"vscripts" "usetargets/turret_crate_build_laser"
+	connections
+	{
+		"OnUseFinished" "laser_turret_crate_rangeDisable0-1"
+		"OnUseCanceled" "laser_turret_crate_rangeDisable0-1"
+		"OnUseStarted" "laser_turret_crate_rangeEnable0-1"
+	}
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "100"
+	"classname" "env_entity_maker"
+	"angles" "0 0 0"
+	"EntityTemplate" "laser_turret_template"
+	"parentname" "laser_turret_crate"
+	"PostSpawnDirection" "0 0 0"
+	"PostSpawnDirectionVariance" "0"
+	"PostSpawnInheritAngles" "0"
+	"spawnflags" "0"
+	"targetname" "laser_turret_crate_spawner"
+	"origin" "-816 -128 36"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "102"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "small_smoke"
+	"parentname" "laser_turret_crate"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "laser_turret_crate_particle"
+	"origin" "-816 -128 36"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "170"
+	"classname" "point_template"
+	"spawnflags" "0"
+	"targetname" "laser_turret_crate_template"
+	"Template01" "laser_turret_crate_spawner"
+	"Template02" "laser_turret_crate_use"
+	"Template03" "laser_turret_crate"
+	"Template05" "laser_turret_crate_particle"
+	"Template06" "laser_turret_crate_range"
+	"origin" "-818 -128 16"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "172"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/minigun_traverse.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "mg_turret_traverse"
+	"origin" "-384 384 34"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "176"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/minigun_gun.mdl"
+	"parentname" "mg_turret_traverse"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "mg_turret_gun"
+	"thinkfunction" "Think"
+	"vscripts" "gdef_turret_mg"
+	connections
+	{
+		"OnUser1" "mg_turret_traverseKill0-1"
+		"OnUser1" "mg_turret_baseKill0-1"
+		"OnUser1" "mg_turret_heattextureKill0-1"
+		"OnUser1" "mg_turret_casingKill0-1"
+		"OnUser1" "mg_turret_tracerKill0-1"
+		"OnUser1" "mg_turret_muzzleflashKill0-1"
+		"OnUser1" "mg_turret_tracer_targetKill0-1"
+		"OnUser1" "mg_turret_shell_effectKill0-1"
+		"OnUser1" "mg_turret_shell_hurtKill0-1"
+		"OnUser1" "mg_turret_heat_effectKill0-1"
+		"OnUser1" "exclusion_zone_mg_turretKill0-1"
+		"OnUser1" "mg_turret_base_useKill0-1"
+		"OnUser1" "mg_turret_comp_useKill0-1"
+		"OnUser1" "mg_turret_gunKill0-1"
+	}
+	"origin" "-382.5 384 45"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "180"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/minigun_base.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "mg_turret_base"
+	"origin" "-384 384 0"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "184"
+	"classname" "prop_physics_override"
+	"angles" "0 0 0"
+	"damagetoenablemotion" "0"
+	"Damagetype" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"forcetoenablemotion" "0"
+	"glowcolor" "0 0 0"
+	"glowstate" "0"
+	"health" "0"
+	"inertiaScale" "1.0"
+	"massScale" "0"
+	"minhealthdmg" "0"
+	"model" "models/props_gdef/turret/minigun_crate.mdl"
+	"nodamageforces" "0"
+	"physdamagescale" "0.1"
+	"shadowcastdist" "0"
+	"skin" "0"
+	"spawnflags" "41216"
+	"targetname" "mg_turret_crate"
+	connections
+	{
+		"OnUser1" "!selfKill0.1-1"
+		"OnUser1" "mg_turret_crate_spawnerKill0.1-1"
+		"OnUser1" "mg_turret_crate_useKill0.1-1"
+		"OnUser1" "mg_turret_crate_particleStart0-1"
+		"OnUser1" "mg_turret_crate_spawnerForceSpawn0-1"
+		"OnPhysGunDrop" "!selfRunScriptCodeg_ModeScript.CrateDropped()0-1"
+		"OnUser1" "mg_turret_crate_rangeKill0.1-1"
+	}
+	"origin" "-816 384 36"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "188"
+	"classname" "point_script_use_target"
+	"model" "mg_turret_crate"
+	"origin" "-816 384 36.25"
+	"targetname" "mg_turret_crate_use"
+	"thinkfunction" "Think"
+	"vscripts" "usetargets/turret_crate_build_mg"
+	connections
+	{
+		"OnUseCanceled" "mg_turret_crate_rangeDisable0-1"
+		"OnUseStarted" "mg_turret_crate_rangeEnable0-1"
+		"OnUseFinished" "mg_turret_crate_rangeDisable0-1"
+	}
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "191"
+	"classname" "point_template"
+	"spawnflags" "0"
+	"targetname" "mg_turret_template"
+	"Template01" "mg_turret_base"
+	"Template02" "mg_turret_traverse"
+	"Template03" "mg_turret_heat_effect"
+	"Template04" "mg_turret_gun"
+	"Template05" "mg_turret_base_use"
+	"Template06" "exclusion_zone_mg_turret"
+	"Template07" "mg_turret_heattexture"
+	"Template08" "mg_turret_muzzleflash"
+	"Template09" "mg_turret_casing"
+	"Template10" "mg_turret_tracer_target"
+	"Template11" "mg_turret_shell_effect"
+	"Template12" "mg_turret_hit_target"
+	"Template13" "mg_turret_shell_hurt"
+	"Template14" "mg_turret_comp_use"
+	"Template16" "mg_turret_tracer"
+	"origin" "-384 384 20"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "193"
+	"classname" "env_entity_maker"
+	"angles" "0 0 0"
+	"EntityTemplate" "mg_turret_template"
+	"parentname" "mg_turret_crate"
+	"PostSpawnDirection" "0 0 0"
+	"PostSpawnDirectionVariance" "0"
+	"PostSpawnInheritAngles" "0"
+	"spawnflags" "0"
+	"targetname" "mg_turret_crate_spawner"
+	"origin" "-816 384 36.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "195"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "small_smoke"
+	"parentname" "mg_turret_crate"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "mg_turret_crate_particle"
+	"origin" "-816 384 36.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "263"
+	"classname" "material_modify_control"
+	"materialName" "models/props_gdef/turret/w_minigun"
+	"materialVar" "$HeatAmount"
+	"parentname" "mg_turret_gun"
+	"targetname" "mg_turret_heattexture"
+	"origin" "-376.214 352.413 9.25002"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "265"
+	"classname" "point_template"
+	"spawnflags" "0"
+	"targetname" "mg_turret_crate_template"
+	"Template01" "mg_turret_crate_spawner"
+	"Template02" "mg_turret_crate_use"
+	"Template03" "mg_turret_crate"
+	"Template05" "mg_turret_crate_particle"
+	"Template06" "mg_turret_crate_range"
+	"origin" "-818 384 16"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "267"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "weapon_muzzle_flash_minigun"
+	"parentname" "mg_turret_gun"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "mg_turret_muzzleflash"
+	"origin" "-358 384 43.75"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "332"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1" "mg_turret_tracer_target"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "weapon_tracers"
+	"parentname" "mg_turret_gun"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "mg_turret_tracer"
+	"origin" "-356 384 43.75"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "397"
+	"classname" "info_particle_system"
+	"angles" "0 225 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "weapon_shell_casing_minigun"
+	"parentname" "mg_turret_gun"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "mg_turret_casing"
+	"origin" "-392 378 40.5"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "465"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "minigun_overheat_smoke"
+	"parentname" "mg_turret_gun"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "mg_turret_heat_effect"
+	"origin" "-358 384 43.75"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "530"
+	"classname" "prop_dynamic"
+	"angles" "0 90 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/turret_traverse.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "flak_turret_traverse"
+	"origin" "-384 -384 32.1"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "534"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"DefaultAnim" "idle"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/turret_gun.mdl"
+	"parentname" "flak_turret_traverse"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "flak_turret_gun"
+	"thinkfunction" "Think"
+	"vscripts" "gdef_turret_flak"
+	connections
+	{
+		"OnUser1" "flak_turret_traverseKill0-1"
+		"OnUser1" "flak_turret_baseKill0-1"
+		"OnUser1" "flak_turret_heattextureKill0-1"
+		"OnUser1" "flak_turret_base_useKill0-1"
+		"OnUser1" "flak_turret_tracerKill0-1"
+		"OnUser1" "flak_turret_muzzleflashKill0-1"
+		"OnUser1" "flak_turret_tracer_targetKill0-1"
+		"OnUser1" "flak_turret_shell_effectKill0-1"
+		"OnUser1" "flak_turret_shell_hurtKill0-1"
+		"OnUser1" "flak_turret_heat_effectKill0-1"
+		"OnUser1" "flak_turret_comp_useKill0-1"
+		"OnUser1" "exclusion_zone_flak_turretKill0-1"
+		"OnUser1" "!selfKill0-1"
+		"OnUser1" "flak_turret_compKill0-1"
+	}
+	"origin" "-385 -384 42.7"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "538"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/turret_base.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "flak_turret_base"
+	"origin" "-384 -384 0"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "542"
+	"classname" "prop_physics_override"
+	"angles" "0 0 0"
+	"damagetoenablemotion" "0"
+	"Damagetype" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"forcetoenablemotion" "0"
+	"glowcolor" "170 0 0"
+	"glowstate" "0"
+	"health" "0"
+	"inertiaScale" "1.0"
+	"massScale" "0"
+	"minhealthdmg" "0"
+	"model" "models/props_gdef/turret/flak_crate.mdl"
+	"nodamageforces" "0"
+	"physdamagescale" "0.1"
+	"shadowcastdist" "0"
+	"skin" "0"
+	"spawnflags" "41216"
+	"targetname" "flak_turret_crate"
+	connections
+	{
+		"OnUser1" "!selfKill0.1-1"
+		"OnUser1" "flak_turret_crate_spawnerKill0.1-1"
+		"OnUser1" "flak_turret_crate_rangeKill0.1-1"
+		"OnUser1" "flak_turret_crate_particleStart0-1"
+		"OnUser1" "flak_turret_crate_spawnerForceSpawn0-1"
+		"OnPhysGunDrop" "!selfRunScriptCodeg_ModeScript.CrateDropped()0-1"
+		"OnUser1" "flak_turret_crate_useKill0.1-1"
+	}
+	"origin" "-816 -384.413 36"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "546"
+	"classname" "point_script_use_target"
+	"model" "flak_turret_crate"
+	"origin" "-816 -384.41 36.25"
+	"targetname" "flak_turret_crate_use"
+	"thinkfunction" "Think"
+	"vscripts" "usetargets/turret_crate_build_flak"
+	connections
+	{
+		"OnUseStarted" "flak_turret_crate_rangeEnable0-1"
+		"OnUseCanceled" "flak_turret_crate_rangeDisable0-1"
+		"OnUseFinished" "flak_turret_crate_rangeDisable0-1"
+	}
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "549"
+	"classname" "point_template"
+	"spawnflags" "0"
+	"targetname" "flak_turret_template"
+	"Template01" "flak_turret_base"
+	"Template02" "flak_turret_traverse"
+	"Template03" "flak_turret_comp"
+	"Template04" "flak_turret_gun"
+	"Template05" "flak_turret_comp_use"
+	"Template06" "flak_turret_heat_effect"
+	"Template07" "flak_turret_heattexture"
+	"Template08" "flak_turret_muzzleflash"
+	"Template09" "flak_turret_base_use"
+	"Template10" "flak_turret_tracer_target"
+	"Template11" "flak_turret_shell_effect"
+	"Template12" "flak_turret_hit_target"
+	"Template13" "flak_turret_shell_hurt"
+	"Template14" "exclusion_zone_flak_turret"
+	"Template15" "flak_turret_casing"
+	"Template16" "flak_turret_tracer"
+	"origin" "-384 -384 20"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "551"
+	"classname" "env_entity_maker"
+	"angles" "0 0 0"
+	"EntityTemplate" "flak_turret_template"
+	"parentname" "flak_turret_crate"
+	"PostSpawnDirection" "0 0 0"
+	"PostSpawnDirectionVariance" "0"
+	"PostSpawnInheritAngles" "0"
+	"spawnflags" "0"
+	"targetname" "flak_turret_crate_spawner"
+	"origin" "-816 -384.413 36.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "553"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "small_smoke"
+	"parentname" "flak_turret_crate"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "flak_turret_crate_particle"
+	"origin" "-816 -384.413 36.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "621"
+	"classname" "point_template"
+	"spawnflags" "0"
+	"targetname" "flak_turret_crate_template"
+	"Template01" "flak_turret_crate_spawner"
+	"Template02" "flak_turret_crate_use"
+	"Template03" "flak_turret_crate"
+	"Template05" "flak_turret_crate_particle"
+	"Template06" "flak_turret_crate_range"
+	"origin" "-818 -384.413 16.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "623"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "weapon_muzzle_flash_50cal"
+	"parentname" "flak_turret_gun"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "flak_turret_muzzleflash"
+	"origin" "-332 -384.113 45.3"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "688"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1" "flak_turret_tracer_target"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "weapon_tracers_explosive"
+	"parentname" "flak_turret_gun"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "flak_turret_tracer"
+	"origin" "-331 -384.113 45.3"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "760"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "minigun_overheat_smoke"
+	"parentname" "flak_turret_gun"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "flak_turret_heat_effect"
+	"origin" "-335 -384.113 45.3"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "825"
+	"classname" "prop_dynamic"
+	"angles" "0 10 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "32"
+	"glowstate" "1"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/laptop/laptop.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "3"
+	"solid" "6"
+	"targetname" "flak_turret_comp"
+	"origin" "-385 -397.413 0.250031"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "829"
+	"classname" "point_script_use_target"
+	"model" "flak_turret_comp"
+	"origin" "-396.28 -400.13 8.25"
+	"targetname" "flak_turret_comp_use"
+	"vscripts" "usetargets/gdef_turret_flak_comp"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "832"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"body" "0"
+	"disablereceiveshadows" "0"
+	"disableshadows" "1"
+	"ExplodeDamage" "0"
+	"ExplodeRadius" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "0"
+	"glowrangemin" "0"
+	"glowstate" "0"
+	"LagCompensate" "0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/exclusion_zone_128.mdl"
+	"PerformanceMode" "0"
+	"pressuredelay" "0"
+	"RandomAnimation" "0"
+	"renderamt" "255"
+	"rendercolor" "255 128 0"
+	"renderfx" "0"
+	"rendermode" "0"
+	"SetBodyGroup" "0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "1"
+	"targetname" "exclusion_zone_flak_turret"
+	"updatechildren" "0"
+	"origin" "-384 -384.413 4.25003"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupid" "12"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "836"
+	"classname" "point_script_use_target"
+	"model" "flak_turret_base"
+	"origin" "-366 -400.41 8.25"
+	"targetname" "flak_turret_base_use"
+	"vscripts" "usetargets/gdef_turret_flak_use"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "839"
+	"classname" "prop_dynamic"
+	"angles" "0 340 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "32"
+	"glowstate" "1"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/laptop/laptop.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "3"
+	"solid" "6"
+	"targetname" "laser_turret_comp"
+	"origin" "-397 -118 0"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "843"
+	"classname" "point_script_use_target"
+	"model" "laser_turret_comp"
+	"origin" "-376 -104 8.25"
+	"targetname" "laser_turret_comp_use"
+	"vscripts" "usetargets/gdef_turret_laser_comp"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "846"
+	"classname" "point_script_use_target"
+	"model" "laser_turret_base"
+	"origin" "-352 -104 8.25"
+	"targetname" "laser_turret_base_use"
+	"vscripts" "usetargets/gdef_turret_laser_use"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "849"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"body" "0"
+	"disablereceiveshadows" "0"
+	"disableshadows" "1"
+	"ExplodeDamage" "0"
+	"ExplodeRadius" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "0"
+	"glowrangemin" "0"
+	"glowstate" "0"
+	"LagCompensate" "0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/exclusion_zone_128.mdl"
+	"PerformanceMode" "0"
+	"pressuredelay" "0"
+	"RandomAnimation" "0"
+	"renderamt" "255"
+	"rendercolor" "255 128 0"
+	"renderfx" "0"
+	"rendermode" "0"
+	"SetBodyGroup" "0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "1"
+	"targetname" "exclusion_zone_laser_turret"
+	"updatechildren" "0"
+	"origin" "-384 -128 4"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupid" "12"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "853"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/flame_turret_traverse.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "flame_turret_traverse"
+	"origin" "-384 128 39.5"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "857"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/flame_turret_gun.mdl"
+	"parentname" "flame_turret_traverse"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "flame_turret_gun"
+	"thinkfunction" "Think"
+	"vscripts" "gdef_turret_flame"
+	connections
+	{
+		"OnUser1" "flame_turret_hurtKill0-1"
+		"OnUser1" "flame_turret_soundKill0-1"
+		"OnUser1" "flame_turret_traverseKill0-1"
+		"OnUser1" "flame_turret_baseKill0-1"
+		"OnUser1" "flame_turret_muzzleflashKill0-1"
+		"OnUser1" "!selfKill0-1"
+		"OnUser1" "flame_turret_comp_useKill0-1"
+		"OnUser1" "exclusion_zone_flame_turretKill0-1"
+		"OnUser1" "flame_turret_base_useKill0-1"
+	}
+	"origin" "-384 128 44.9"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "865"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/turret/flame_turret_base.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "flame_turret_base"
+	"origin" "-384 128 0"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "872"
+	"classname" "point_template"
+	"spawnflags" "0"
+	"targetname" "flame_turret_template"
+	"Template01" "flame_turret_base"
+	"Template02" "flame_turret_traverse"
+	"Template03" "flame_turret_sound"
+	"Template04" "flame_turret_gun"
+	"Template05" "flame_turret_hurt"
+	"Template08" "flame_turret_muzzleflash"
+	"Template09" "exclusion_zone_flame_turret"
+	"Template10" "flame_turret_comp_use"
+	"Template11" "flame_turret_base_use"
+	"origin" "-384 128 20"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "876"
+	"classname" "info_particle_system"
+	"angles" "30 0 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "fire_jet_01"
+	"parentname" "flame_turret_gun"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "flame_turret_muzzleflash"
+	"origin" "-320 129 44.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "941"
+	"classname" "prop_physics_override"
+	"angles" "0 0 0"
+	"damagetoenablemotion" "0"
+	"Damagetype" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"forcetoenablemotion" "0"
+	"glowcolor" "0 0 0"
+	"glowstate" "0"
+	"health" "0"
+	"inertiaScale" "1.0"
+	"massScale" "0"
+	"minhealthdmg" "0"
+	"model" "models/props_gdef/turret/flame_crate.mdl"
+	"nodamageforces" "0"
+	"physdamagescale" "0.1"
+	"shadowcastdist" "0"
+	"skin" "0"
+	"spawnflags" "41216"
+	"targetname" "flame_turret_crate"
+	connections
+	{
+		"OnUser1" "!selfKill0.1-1"
+		"OnUser1" "flame_turret_crate_spawnerKill0.1-1"
+		"OnUser1" "flame_turret_crate_useKill0.1-1"
+		"OnUser1" "flame_turret_crate_particleStart0-1"
+		"OnUser1" "flame_turret_crate_spawnerForceSpawn0-1"
+		"OnPhysGunDrop" "!selfRunScriptCodeg_ModeScript.CrateDropped()0-1"
+		"OnUser1" "flame_turret_crate_rangeKill0.1-1"
+	}
+	"origin" "-816 129 36"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "945"
+	"classname" "point_script_use_target"
+	"model" "flame_turret_crate"
+	"origin" "-816 128.87 36"
+	"targetname" "flame_turret_crate_use"
+	"thinkfunction" "Think"
+	"vscripts" "usetargets/turret_crate_build_flame"
+	connections
+	{
+		"OnUseFinished" "flame_turret_crate_rangeDisable0-1"
+		"OnUseCanceled" "flame_turret_crate_rangeDisable0-1"
+		"OnUseStarted" "flame_turret_crate_rangeEnable0-1"
+	}
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "948"
+	"classname" "env_entity_maker"
+	"angles" "0 0 0"
+	"EntityTemplate" "flame_turret_template"
+	"parentname" "flame_turret_crate"
+	"PostSpawnDirection" "0 0 0"
+	"PostSpawnDirectionVariance" "0"
+	"PostSpawnInheritAngles" "0"
+	"spawnflags" "0"
+	"targetname" "flame_turret_crate_spawner"
+	"origin" "-816 129 36"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "950"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "small_smoke"
+	"parentname" "flame_turret_crate"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "flame_turret_crate_particle"
+	"origin" "-816 129 36"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "1018"
+	"classname" "point_template"
+	"spawnflags" "0"
+	"targetname" "flame_turret_crate_template"
+	"Template01" "flame_turret_crate_spawner"
+	"Template02" "flame_turret_crate_use"
+	"Template03" "flame_turret_crate"
+	"Template05" "flame_turret_crate_particle"
+	"Template06" "flame_turret_crate_range"
+	"origin" "-818 129 16"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1024"
+	"classname" "point_script_use_target"
+	"model" "flame_turret_gun"
+	"origin" "-380.28 142.87 8.25"
+	"targetname" "flame_turret_comp_use"
+	"vscripts" "usetargets/gdef_turret_flame_comp"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1027"
+	"classname" "point_script_use_target"
+	"model" "flame_turret_base"
+	"origin" "-360 135.59 8.25"
+	"targetname" "flame_turret_base_use"
+	"vscripts" "usetargets/gdef_turret_flame_use"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1030"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"body" "0"
+	"disablereceiveshadows" "0"
+	"disableshadows" "1"
+	"ExplodeDamage" "0"
+	"ExplodeRadius" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "0"
+	"glowrangemin" "0"
+	"glowstate" "0"
+	"LagCompensate" "0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/exclusion_zone_128.mdl"
+	"PerformanceMode" "0"
+	"pressuredelay" "0"
+	"RandomAnimation" "0"
+	"renderamt" "255"
+	"rendercolor" "255 128 0"
+	"renderfx" "0"
+	"rendermode" "0"
+	"SetBodyGroup" "0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "1"
+	"targetname" "exclusion_zone_flame_turret"
+	"updatechildren" "0"
+	"origin" "-384 128.867 4"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupid" "12"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "1034"
+	"classname" "prop_dynamic"
+	"angles" "0 180 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/workbench.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"targetname" "turret_workbench_prop"
+	"vscripts" "gdef_workbench"
+	"origin" "0 0 16.5"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1038"
+	"classname" "env_entity_maker"
+	"angles" "0 0 0"
+	"EntityTemplate" "flame_turret_crate_template"
+	"PostSpawnDirection" "0 0 0"
+	"PostSpawnDirectionVariance" "0.15"
+	"PostSpawnInheritAngles" "0"
+	"PostSpawnSpeed" "0"
+	"spawnflags" "0"
+	"targetname" "turret_workbench_maker_flame"
+	"origin" "0.739014 -21 38.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1040"
+	"classname" "info_particle_system"
+	"angles" "0 270 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "small_smoke"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "turret_workbench_particle"
+	"origin" "1 -22 38.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "1105"
+	"classname" "ambient_generic"
+	"health" "10"
+	"message" "ui/gift_drop.wav"
+	"pitch" "100"
+	"pitchstart" "100"
+	"radius" "1250"
+	"SourceEntityName" "turret_workbench_prop"
+	"spawnflags" "48"
+	"targetname" "turret_crate_build_sound"
+	"origin" "2 11.084 44.4494"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "1108"
+	"classname" "point_script_use_target"
+	"model" "turret_workbench_flame_button"
+	"origin" "-33 48 36.25"
+	"targetname" "turret_workbench_flame_use"
+	"vscripts" "usetargets/turret_workbench_build_flame"
+	connections
+	{
+		"OnUseFinished" "turret_workbench_maker_flameForceSpawn0-1"
+		"OnUseFinished" "turret_crate_build_soundPlaySound0-1"
+		"OnUseFinished" "turret_workbench_particleStart0-1"
+		"OnUser1" "turret_workbench_flame_useRunScriptCodeEnableUse()0-1"
+		"OnUser1" "turret_workbench_flame_useRunScriptCodeTurnOn()0-1"
+		"OnUseCanceled" "!selfFireUser10-1"
+		"OnUseFinished" "turret_workbench_particleStop2-1"
+		"OnUseStarted" "turret_workbench_propSkin20-1"
+		"OnUseFinished" "gdef_workbench_hintEndHint0-1"
+	}
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1111"
+	"classname" "point_script_use_target"
+	"model" "turret_workbench_laser_button"
+	"origin" "-33 32 36.25"
+	"targetname" "turret_workbench_laser_use"
+	"vscripts" "usetargets/turret_workbench_build_laser"
+	connections
+	{
+		"OnUseFinished" "turret_workbench_maker_laserForceSpawn0-1"
+		"OnUseFinished" "turret_crate_build_soundPlaySound0-1"
+		"OnUseFinished" "turret_workbench_particleStart0-1"
+		"OnUser1" "turret_workbench_laser_useRunScriptCodeEnableUse()0-1"
+		"OnUser1" "turret_workbench_laser_useRunScriptCodeTurnOn()0-1"
+		"OnUseCanceled" "!selfFireUser10-1"
+		"OnUseFinished" "turret_workbench_particleStop2-1"
+		"OnUseStarted" "turret_workbench_propSkin30-1"
+		"OnUseFinished" "gdef_workbench_hintEndHint0-1"
+	}
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1114"
+	"classname" "env_entity_maker"
+	"angles" "0 0 0"
+	"EntityTemplate" "laser_turret_crate_template"
+	"PostSpawnDirection" "0 0 0"
+	"PostSpawnDirectionVariance" "0.15"
+	"PostSpawnInheritAngles" "0"
+	"PostSpawnSpeed" "0"
+	"spawnflags" "0"
+	"targetname" "turret_workbench_maker_laser"
+	"origin" "0.739014 -19 38.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1116"
+	"classname" "point_script_use_target"
+	"model" "turret_workbench_mg_button"
+	"origin" "-33 64 36.25"
+	"targetname" "turret_workbench_mg_use"
+	"vscripts" "usetargets/turret_workbench_build_mg"
+	connections
+	{
+		"OnUseFinished" "turret_workbench_maker_mgForceSpawn0-1"
+		"OnUseFinished" "turret_crate_build_soundPlaySound0-1"
+		"OnUseFinished" "turret_workbench_particleStart0-1"
+		"OnUser1" "turret_workbench_mg_useRunScriptCodeEnableUse()0-1"
+		"OnUser1" "turret_workbench_mg_useRunScriptCodeTurnOn()0-1"
+		"OnUseCanceled" "!selfFireUser10-1"
+		"OnUseFinished" "turret_workbench_particleStop2-1"
+		"OnUseStarted" "turret_workbench_propSkin10-1"
+		"OnUseFinished" "gdef_workbench_hintEndHint0-1"
+	}
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1119"
+	"classname" "env_entity_maker"
+	"angles" "0 0 0"
+	"EntityTemplate" "mg_turret_crate_template"
+	"PostSpawnDirection" "0 0 0"
+	"PostSpawnDirectionVariance" "0.15"
+	"PostSpawnInheritAngles" "0"
+	"PostSpawnSpeed" "0"
+	"spawnflags" "0"
+	"targetname" "turret_workbench_maker_mg"
+	"origin" "0.739014 -20 38.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1121"
+	"classname" "point_script_use_target"
+	"model" "turret_workbench_flak_button"
+	"origin" "-33 16 36.25"
+	"targetname" "turret_workbench_flak_use"
+	"vscripts" "usetargets/turret_workbench_build_flak"
+	connections
+	{
+		"OnUseFinished" "turret_workbench_maker_flakForceSpawn0-1"
+		"OnUseFinished" "turret_crate_build_soundPlaySound0-1"
+		"OnUseFinished" "turret_workbench_particleStart0-1"
+		"OnUser1" "turret_workbench_flak_useRunScriptCodeEnableUse()0-1"
+		"OnUser1" "turret_workbench_flak_useRunScriptCodeTurnOn()0-1"
+		"OnUseCanceled" "!selfFireUser10-1"
+		"OnUseFinished" "turret_workbench_particleStop2-1"
+		"OnUseStarted" "turret_workbench_propSkin40-1"
+		"OnUseFinished" "gdef_workbench_hintEndHint0-1"
+	}
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1124"
+	"classname" "prop_dynamic"
+	"angles" "0 180 0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowstate" "1"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/workbench_button.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"targetname" "turret_workbench_flak_button"
+	"origin" "-10.239 23.1 37.75"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1128"
+	"classname" "env_entity_maker"
+	"angles" "0 0 0"
+	"EntityTemplate" "flak_turret_crate_template"
+	"PostSpawnDirection" "0 0 0"
+	"PostSpawnDirectionVariance" "0.15"
+	"PostSpawnInheritAngles" "0"
+	"PostSpawnSpeed" "0"
+	"spawnflags" "0"
+	"targetname" "turret_workbench_maker_flak"
+	"origin" "0.739014 -22 38.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1130"
+	"classname" "prop_dynamic"
+	"angles" "0 180 0"
+	"body" "0"
+	"disablereceiveshadows" "0"
+	"disableshadows" "0"
+	"disableX360" "0"
+	"ExplodeDamage" "0"
+	"ExplodeRadius" "0"
+	"fademaxdist" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "0"
+	"glowrangemin" "0"
+	"glowstate" "1"
+	"LagCompensate" "0"
+	"MaxAnimTime" "10"
+	"maxcpulevel" "0"
+	"maxgpulevel" "0"
+	"MinAnimTime" "5"
+	"mincpulevel" "0"
+	"mingpulevel" "0"
+	"model" "models/props_gdef/workbench_button.mdl"
+	"PerformanceMode" "0"
+	"pressuredelay" "0"
+	"RandomAnimation" "0"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"renderfx" "0"
+	"rendermode" "0"
+	"SetBodyGroup" "0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "0"
+	"targetname" "turret_workbench_laser_button"
+	"updatechildren" "0"
+	"origin" "-10.239 32.1 37.75"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1134"
+	"classname" "prop_dynamic"
+	"angles" "0 180 0"
+	"body" "0"
+	"disablereceiveshadows" "0"
+	"disableshadows" "0"
+	"disableX360" "0"
+	"ExplodeDamage" "0"
+	"ExplodeRadius" "0"
+	"fademaxdist" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "0"
+	"glowrangemin" "0"
+	"glowstate" "1"
+	"LagCompensate" "0"
+	"MaxAnimTime" "10"
+	"maxcpulevel" "0"
+	"maxgpulevel" "0"
+	"MinAnimTime" "5"
+	"mincpulevel" "0"
+	"mingpulevel" "0"
+	"model" "models/props_gdef/workbench_button.mdl"
+	"PerformanceMode" "0"
+	"pressuredelay" "0"
+	"RandomAnimation" "0"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"renderfx" "0"
+	"rendermode" "0"
+	"SetBodyGroup" "0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "0"
+	"targetname" "turret_workbench_flame_button"
+	"updatechildren" "0"
+	"origin" "-10.239 40.9 37.75"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1138"
+	"classname" "prop_dynamic"
+	"angles" "0 180 0"
+	"body" "0"
+	"disablereceiveshadows" "0"
+	"disableshadows" "0"
+	"disableX360" "0"
+	"ExplodeDamage" "0"
+	"ExplodeRadius" "0"
+	"fademaxdist" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "0"
+	"glowrangemin" "0"
+	"glowstate" "1"
+	"LagCompensate" "0"
+	"MaxAnimTime" "10"
+	"maxcpulevel" "0"
+	"maxgpulevel" "0"
+	"MinAnimTime" "5"
+	"mincpulevel" "0"
+	"mingpulevel" "0"
+	"model" "models/props_gdef/workbench_button.mdl"
+	"PerformanceMode" "0"
+	"pressuredelay" "0"
+	"RandomAnimation" "0"
+	"renderamt" "255"
+	"rendercolor" "255 255 255"
+	"renderfx" "0"
+	"rendermode" "0"
+	"SetBodyGroup" "0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "0"
+	"targetname" "turret_workbench_mg_button"
+	"updatechildren" "0"
+	"origin" "-10.239 49.9 37.75"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "1142"
+	"classname" "info_target_instructor_hint"
+	"parentname" "laser_turret_gun"
+	"targetname" "laser_turret_beam_target"
+	"origin" "413 -128 49"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "1144"
+	"classname" "info_particle_target"
+	"angles" "0 0 0"
+	"parentname" "mg_turret_hit_target"
+	"targetname" "mg_turret_tracer_target"
+	"origin" "404 384 43.75"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "1146"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "impact_explosive_ammo_large"
+	"parentname" "mg_turret_hit_target"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "mg_turret_shell_effect"
+	"origin" "404 384 43.75"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "1211"
+	"classname" "point_hurt"
+	"Damage" "40"
+	"DamageDelay" "1"
+	"DamageRadius" "35"
+	"DamageType" "-2147483646"
+	"targetname" "mg_turret_shell_hurt"
+	"origin" "404 384 43.75"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "1214"
+	"classname" "info_target_instructor_hint"
+	"targetname" "mg_turret_hit_target"
+	"origin" "404 384 43.75"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "1216"
+	"classname" "info_particle_target"
+	"angles" "0 0 0"
+	"parentname" "flak_turret_hit_target"
+	"targetname" "flak_turret_tracer_target"
+	"origin" "432 -384.413 45.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "1218"
+	"classname" "info_particle_system"
+	"angles" "0 0 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "impact_explosive_ammo_large"
+	"parentname" "flak_turret_hit_target"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "flak_turret_shell_effect"
+	"origin" "432 -384.113 45.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "1283"
+	"classname" "point_hurt"
+	"Damage" "150"
+	"DamageDelay" "1"
+	"DamageRadius" "50"
+	"DamageType" "-2147483646"
+	"targetname" "flak_turret_shell_hurt"
+	"origin" "432 -384.113 45.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "1286"
+	"classname" "info_target_instructor_hint"
+	"targetname" "flak_turret_hit_target"
+	"origin" "432 -384.113 45.25"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "24353"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"body" "0"
+	"disablereceiveshadows" "0"
+	"disableshadows" "1"
+	"ExplodeDamage" "0"
+	"ExplodeRadius" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "0"
+	"glowrangemin" "0"
+	"glowstate" "0"
+	"LagCompensate" "0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/exclusion_zone_128.mdl"
+	"PerformanceMode" "0"
+	"pressuredelay" "0"
+	"RandomAnimation" "0"
+	"renderamt" "255"
+	"rendercolor" "255 128 0"
+	"renderfx" "0"
+	"rendermode" "0"
+	"SetBodyGroup" "0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "1"
+	"targetname" "exclusion_zone_mg_turret"
+	"updatechildren" "0"
+	"origin" "-384 384 4"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupid" "12"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "26134"
+	"classname" "trigger_hurt"
+	"damage" "15"
+	"damagecap" "20"
+	"damagemodel" "0"
+	"damagetype" "8"
+	"nodmgforce" "1"
+	"origin" "-320 128 48"
+	"parentname" "flame_turret_gun"
+	"spawnflags" "67"
+	"StartDisabled" "1"
+	"targetname" "flame_turret_hurt"
+	"thinkalways" "1"
+	solid
+	{
+		"id" "26131"
+		side
+		{
+			"id" "18"
+			"plane" "(-368 104 72) (-368 152 72) (-272 152 72)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[1 0 0 0] 0.25"
+			"vaxis" "[0 -1 0 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "17"
+			"plane" "(-368 152 24) (-368 104 24) (-272 104 24)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[-1 0 0 0] 0.25"
+			"vaxis" "[0 -1 0 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "16"
+			"plane" "(-368 104 24) (-368 152 24) (-368 152 72)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[0 -1 0 0] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "15"
+			"plane" "(-272 152 24) (-272 104 24) (-272 104 72)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[0 1 0 0] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "14"
+			"plane" "(-368 152 24) (-272 152 24) (-272 152 72)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[-1 0 0 0] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "13"
+			"plane" "(-272 104 24) (-368 104 24) (-368 104 72)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[1 0 0 0] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		editor
+		{
+			"color" "220 30 220"
+			"visgroupshown" "1"
+			"visgroupautoshown" "1"
+		}
+	}
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "27292"
+	"classname" "trigger_hurt"
+	"damage" "7"
+	"damagecap" "20"
+	"damagemodel" "0"
+	"damagetype" "8"
+	"nodmgforce" "1"
+	"origin" "-244 128 56"
+	"parentname" "flame_turret_gun"
+	"spawnflags" "67"
+	"StartDisabled" "1"
+	"targetname" "flame_turret_hurt"
+	"thinkalways" "1"
+	solid
+	{
+		"id" "27293"
+		side
+		{
+			"id" "30"
+			"plane" "(-264 104 88) (-264 152 88) (-224 152 88)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[1 0 0 -8] 0.25"
+			"vaxis" "[0 -1 0 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "29"
+			"plane" "(-264 152 24) (-264 104 24) (-224 104 24)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[-1 0 0 8] 0.25"
+			"vaxis" "[0 -1 0 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "28"
+			"plane" "(-264 104 24) (-264 152 24) (-264 152 88)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[0 -1 0 0] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "27"
+			"plane" "(-224 152 24) (-224 104 24) (-224 104 88)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[0 1 0 0] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "26"
+			"plane" "(-264 152 24) (-224 152 24) (-224 152 88)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[-1 0 0 8] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		side
+		{
+			"id" "25"
+			"plane" "(-224 104 24) (-264 104 24) (-264 104 88)"
+			"material" "TOOLS/TOOLSTRIGGER"
+			"uaxis" "[1 0 0 -8] 0.25"
+			"vaxis" "[0 0 -1 0] 0.25"
+			"rotation" "0"
+			"lightmapscale" "16"
+			"smoothing_groups" "0"
+		}
+		editor
+		{
+			"color" "220 30 220"
+			"visgroupshown" "1"
+			"visgroupautoshown" "1"
+		}
+	}
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+entity
+{
+	"id" "28610"
+	"classname" "point_script_use_target"
+	"model" "mg_turret_gun"
+	"origin" "-387.28 412 8.25"
+	"targetname" "mg_turret_comp_use"
+	"vscripts" "usetargets/gdef_turret_mg_comp"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "28613"
+	"classname" "point_script_use_target"
+	"model" "mg_turret_base"
+	"origin" "-367 404.72 8.25"
+	"targetname" "mg_turret_base_use"
+	"vscripts" "usetargets/gdef_turret_mg_use"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "29740"
+	"classname" "prop_dynamic"
+	"angles" "0 90 0"
+	"disablereceiveshadows" "1"
+	"disableshadows" "1"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/exclusion_zone_workbench.mdl"
+	"renderamt" "255"
+	"rendercolor" "255 0 0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "1"
+	"targetname" "exclusion_zone_workbench"
+	"origin" "1 0 32"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 500]"
+	}
+}
+entity
+{
+	"id" "32744"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"body" "0"
+	"disablereceiveshadows" "1"
+	"disableshadows" "1"
+	"ExplodeDamage" "0"
+	"ExplodeRadius" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "0"
+	"glowrangemin" "0"
+	"glowstate" "0"
+	"LagCompensate" "0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/range_zone_1500.mdl"
+	"parentname" "flak_turret_crate"
+	"PerformanceMode" "0"
+	"pressuredelay" "0"
+	"RandomAnimation" "0"
+	"renderamt" "255"
+	"rendercolor" "200 200 200"
+	"renderfx" "0"
+	"rendermode" "0"
+	"SetBodyGroup" "0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "1"
+	"targetname" "flak_turret_crate_range"
+	"updatechildren" "0"
+	"origin" "-816 -385 18"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupid" "12"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "32800"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"body" "0"
+	"disablereceiveshadows" "1"
+	"disableshadows" "1"
+	"ExplodeDamage" "0"
+	"ExplodeRadius" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "0"
+	"glowrangemin" "0"
+	"glowstate" "0"
+	"LagCompensate" "0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/range_zone_500.mdl"
+	"parentname" "mg_turret_crate"
+	"PerformanceMode" "0"
+	"pressuredelay" "0"
+	"RandomAnimation" "0"
+	"renderamt" "255"
+	"rendercolor" "200 200 200"
+	"renderfx" "0"
+	"rendermode" "0"
+	"SetBodyGroup" "0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "1"
+	"targetname" "mg_turret_crate_range"
+	"updatechildren" "0"
+	"origin" "-816 384 23"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupid" "12"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "32940"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"body" "0"
+	"disablereceiveshadows" "1"
+	"disableshadows" "1"
+	"ExplodeDamage" "0"
+	"ExplodeRadius" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "0"
+	"glowrangemin" "0"
+	"glowstate" "0"
+	"LagCompensate" "0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/range_zone_160.mdl"
+	"parentname" "flame_turret_crate"
+	"PerformanceMode" "0"
+	"pressuredelay" "0"
+	"RandomAnimation" "0"
+	"renderamt" "255"
+	"rendercolor" "200 200 200"
+	"renderfx" "0"
+	"rendermode" "0"
+	"SetBodyGroup" "0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "1"
+	"targetname" "flame_turret_crate_range"
+	"updatechildren" "0"
+	"origin" "-816 128 26"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupid" "12"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "32985"
+	"classname" "prop_dynamic"
+	"angles" "0 0 0"
+	"body" "0"
+	"disablereceiveshadows" "1"
+	"disableshadows" "1"
+	"ExplodeDamage" "0"
+	"ExplodeRadius" "0"
+	"fademindist" "-1"
+	"fadescale" "1"
+	"glowbackfacemult" "1.0"
+	"glowcolor" "0 0 0"
+	"glowrange" "0"
+	"glowrangemin" "0"
+	"glowstate" "0"
+	"LagCompensate" "0"
+	"MaxAnimTime" "10"
+	"MinAnimTime" "5"
+	"model" "models/props_gdef/range_zone_800.mdl"
+	"parentname" "laser_turret_crate"
+	"PerformanceMode" "0"
+	"pressuredelay" "0"
+	"RandomAnimation" "0"
+	"renderamt" "255"
+	"rendercolor" "200 200 200"
+	"renderfx" "0"
+	"rendermode" "0"
+	"SetBodyGroup" "0"
+	"skin" "0"
+	"solid" "6"
+	"spawnflags" "0"
+	"StartDisabled" "1"
+	"targetname" "laser_turret_crate_range"
+	"updatechildren" "0"
+	"origin" "-816 -128 26"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupid" "12"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "33185"
+	"classname" "info_particle_system"
+	"angles" "0 270 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "weapon_shell_casing_50cal"
+	"parentname" "flak_turret_gun"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "flak_turret_casing"
+	"origin" "-385 -388 44.5"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "34429"
+	"classname" "material_modify_control"
+	"materialName" "models/props_gdef/turret/laser_power_light"
+	"materialVar" "$HeatAmount"
+	"parentname" "laser_turret_base"
+	"targetname" "laser_turret_heattexture"
+	"origin" "-381 -162 9.25002"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "35758"
+	"classname" "info_particle_system"
+	"angles" "-90 120 0"
+	"cpoint1_parent" "0"
+	"cpoint2_parent" "0"
+	"cpoint3_parent" "0"
+	"cpoint4_parent" "0"
+	"cpoint5_parent" "0"
+	"cpoint6_parent" "0"
+	"cpoint7_parent" "0"
+	"effect_name" "steam_short"
+	"parentname" "laser_turret_base"
+	"render_in_front" "0"
+	"start_active" "0"
+	"targetname" "laser_turret_heat_effect"
+	"origin" "-376 -119 16"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "37022"
+	"classname" "env_instructor_hint"
+	"hint_allow_nodraw_target" "1"
+	"hint_auto_start" "1"
+	"hint_caption" "Build sentry turrets to protect the gnome"
+	"hint_color" "255 255 255"
+	"hint_display_limit" "1"
+	"hint_forcecaption" "1"
+	"hint_icon_offscreen" "icon_info"
+	"hint_icon_offset" "16"
+	"hint_icon_onscreen" "icon_info"
+	"hint_instance_type" "0"
+	"hint_name" "gdef_hint"
+	"hint_range" "0"
+	"hint_target" "turret_workbench_laser_button"
+	"hint_timeout" "10"
+	"targetname" "gdef_workbench_hint"
+	"origin" "-61 29 9"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 0]"
+	}
+}
+entity
+{
+	"id" "869"
+	"classname" "ambient_generic"
+	"health" "10"
+	"message" "ambient/atmosphere/firewerks_stage_pyro_01.wav"
+	"pitch" "100"
+	"pitchstart" "100"
+	"radius" "1250"
+	"SourceEntityName" "flame_turret_gun"
+	"spawnflags" "48"
+	"targetname" "flame_turret_sound"
+	"origin" "-352 116.587 9.25003"
+	editor
+	{
+		"color" "220 30 220"
+		"visgroupshown" "1"
+		"visgroupautoshown" "1"
+		"logicalpos" "[0 1000]"
+	}
+}
+cameras
+{
+	"activecamera" "-1"
+}
+cordons
+{
+	"active" "0"
+}
